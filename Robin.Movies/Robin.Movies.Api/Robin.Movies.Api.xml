@@ -1,0 +1,138 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Robin.Movies.Api</name>
+    </assembly>
+    <members>
+        <member name="T:Robin.Movies.Api.Constants.ApiConstant">
+            <summary>
+            Holds all the api constants
+            </summary>
+        </member>
+        <member name="T:Robin.Movies.Api.Constants.ApiConstant.MongoDb">
+            <summary>
+            Holds all the MongoDb related constants
+            </summary>
+        </member>
+        <member name="T:Robin.Movies.Api.Constants.ApiConstant.MongoDb.CollectionName">
+            <summary>
+            Holds all the collection names used in this api
+            </summary>
+        </member>
+        <member name="F:Robin.Movies.Api.Constants.ApiConstant.MongoDb.CollectionName.MovieCollection">
+            <summary>
+            Hold Movie Collection Name
+            </summary>
+        </member>
+        <member name="T:Robin.Movies.Api.Constants.ApiConstant.Config">
+            <summary>
+            Holds all the config related constants
+            </summary>
+        </member>
+        <member name="T:Robin.Movies.Api.Constants.ApiConstant.Config.Section">
+            <summary>
+            Holds all the config section 
+            </summary>
+        </member>
+        <member name="F:Robin.Movies.Api.Constants.ApiConstant.Config.Section.MongoDbContextOptions">
+            <summary>
+            Hold the section name of MongoDbContextOptions
+            </summary>
+        </member>
+        <member name="T:Robin.Movies.Api.DataAccess.Contracts.ICollectionContext`1">
+            <summary>
+            Manages the collection of type TModel
+            </summary>
+            <typeparam name="TModel">Type of collection model</typeparam>
+        </member>
+        <member name="P:Robin.Movies.Api.DataAccess.Contracts.ICollectionContext`1.Collection">
+            <summary>
+            Provides acess to the instance of collection of type TModel
+            </summary>
+        </member>
+        <member name="T:Robin.Movies.Api.DataAccess.Contracts.IDbContext">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Robin.Movies.Api.DataAccess.Contracts.IDbContext.MongoDatabase">
+            <summary>
+            Provides MongoDatabase instance
+            </summary>
+        </member>
+        <member name="T:Robin.Movies.Api.DataAccess.MoviesCollectionContext">
+            <summary>
+            Manages movies collection
+            </summary>
+        </member>
+        <member name="M:Robin.Movies.Api.DataAccess.MoviesCollectionContext.#ctor(MongoDB.Driver.IMongoClient,Microsoft.Extensions.Options.IOptions{Robin.Movies.Api.DataAccess.Options.MongoDbContextOptions})">
+            <summary>
+            Obtains the connection with MongoDb
+            </summary>
+            <param name="mongoClient"></param>
+            <param name="options"></param>
+        </member>
+        <member name="P:Robin.Movies.Api.DataAccess.MoviesCollectionContext.Collection">
+            <summary>
+            Give the instance of Movies Collection
+            </summary>
+        </member>
+        <member name="T:Robin.Movies.Api.DataAccess.Options.MongoDbContextOptions">
+            <summary>
+            Holds the MongoDb connection options
+            </summary>
+        </member>
+        <member name="P:Robin.Movies.Api.DataAccess.Options.MongoDbContextOptions.ConnectionUrl">
+            <summary>
+            MongoDb connection url
+            </summary>
+        </member>
+        <member name="P:Robin.Movies.Api.DataAccess.Options.MongoDbContextOptions.DatabaseName">
+            <summary>
+            Name of the database 
+            </summary>
+        </member>
+        <member name="P:Robin.Movies.Api.DataAccess.Options.MongoDbContextOptions.CollectionName">
+            <summary>
+            Name of the collection
+            </summary>
+        </member>
+        <member name="T:Robin.Movies.Api.DataAccess.Options.MongoDbContextOptionsValidator">
+            <summary>
+            Responsible for validating the MongoDbContextOptions
+            </summary>
+        </member>
+        <member name="M:Robin.Movies.Api.DataAccess.Options.MongoDbContextOptionsValidator.Validate(System.String,Robin.Movies.Api.DataAccess.Options.MongoDbContextOptions)">
+            <summary>
+            Validates the MongoDbContextOptions
+            </summary>
+            <param name="name">Name of the property which will be validated</param>
+            <param name="options">Instance of MongoDbContextOptions to be validated</param>
+            <returns>Returns the ValidationResult depending on success or failure</returns>
+        </member>
+        <member name="M:Robin.Movies.Api.Extensions.StartupExtension.ConfigureServices(Microsoft.AspNetCore.Builder.WebApplicationBuilder)">
+            <summary>
+            Manages the registration of services
+            </summary>
+            <param name="builder"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Robin.Movies.Api.Services.Contracts.IMoviesRepository">
+            <summary>
+            Manages the operation on movies
+            </summary>
+        </member>
+        <member name="M:Robin.Movies.Api.Services.Contracts.IMoviesRepository.FindByNameAsync(System.String)">
+            <summary>
+            
+            </summary>
+            <param name="name"></param>
+            <returns></returns>
+        </member>
+        <member name="P:Robin.Movies.Api.Services.MongoRepository`1.Collection">
+            <summary>
+            Instance of the MongoCollection
+            </summary>
+        </member>
+    </members>
+</doc>

@@ -1,0 +1,9 @@
+@Robin.Movies.Api_HostAddress = http://localhost:5081
+
+GET {{Robin.Movies.Api_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
+
+POST {{Robin.Movies.Api_HostAddress}}/v1.0/movies
+Accept: application/json

@@ -1,0 +1,9 @@
+﻿################################################################################
+# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
+################################################################################
+
+/.vs
+/Robin.Movies/.vs/ProjectEvaluation
+/Robin.Movies/Robin.Movies.Api/bin/Debug/net8.0
+/Robin.Movies/Robin.Movies.Api/obj
+/Robin.Movies/.vs/Robin.Movies
