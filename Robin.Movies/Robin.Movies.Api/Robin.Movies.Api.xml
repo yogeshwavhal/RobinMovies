@@ -39,6 +39,46 @@
             Hold the section name of MongoDbContextOptions
             </summary>
         </member>
+        <member name="T:Robin.Movies.Api.Controllers.MoviesController">
+            <summary>
+            Controller for movies
+            </summary>
+        </member>
+        <member name="M:Robin.Movies.Api.Controllers.MoviesController.#ctor(Microsoft.Extensions.Logging.ILogger{Robin.Movies.Api.Controllers.MoviesController},AutoMapper.IMapper,Robin.Movies.Api.Services.Contracts.IMoviesRepository)">
+            <summary>
+            Initializes the dependencies
+            </summary>
+            <param name="logger"></param>
+            <param name="mapper"></param>
+            <param name="moviesRepository"></param>
+        </member>
+        <member name="M:Robin.Movies.Api.Controllers.MoviesController.GetMovie(System.String)">
+            <summary>
+            Gets the Movie response by mapping id
+            </summary>
+            <param name="movieId"></param>
+            <returns>Returns the requested movie</returns>
+            <response code="200">Returns the requested movie</response>
+            <response code="404">Requested movie is not found</response>
+            <response code="500">Server error occurred while searching for the requested movie</response>
+        </member>
+        <member name="M:Robin.Movies.Api.Controllers.MoviesController.GetAllMovies">
+            <summary>
+            Gets all the movies
+            </summary>
+            <returns>Returns movies collection</returns>
+            <response code="200">Returns the requested movies collection</response>
+            <response code="404">No movie found</response>
+            <response code="500">Server error occurred while searching for the requested movie</response>
+        </member>
+        <member name="M:Robin.Movies.Api.Controllers.MoviesController.CreateMovie(Robin.Movies.Api.Models.MovieForCreationRequest)">
+            <summary>
+            Creates the Movie
+            </summary>
+            <returns>Returns the created movie</returns>
+            <response code="200">Movie has been created successfully</response>
+            <response code="400">Could not creat a movie</response>
+        </member>
         <member name="T:Robin.Movies.Api.DataAccess.Contracts.ICollectionContext`1">
             <summary>
             Manages the collection of type TModel
@@ -110,12 +150,124 @@
             <param name="options">Instance of MongoDbContextOptions to be validated</param>
             <returns>Returns the ValidationResult depending on success or failure</returns>
         </member>
+        <member name="T:Robin.Movies.Api.Extensions.StartupExtension">
+            <summary>
+            Extensions for Configuring services and pipelines
+            </summary>
+        </member>
+        <member name="M:Robin.Movies.Api.Extensions.StartupExtension.ConfigurePipeline(Microsoft.AspNetCore.Builder.WebApplicationBuilder)">
+            <summary>
+            It configures the pipeline
+            </summary>
+            <param name="builder">instance of WebApplicationBuilder </param>
+            <returns></returns>
+        </member>
         <member name="M:Robin.Movies.Api.Extensions.StartupExtension.ConfigureServices(Microsoft.AspNetCore.Builder.WebApplicationBuilder)">
             <summary>
             Manages the registration of services
             </summary>
             <param name="builder"></param>
             <returns></returns>
+        </member>
+        <member name="T:Robin.Movies.Api.Models.CastForCreationRequest">
+            <summary>
+            Request model for movie cast creation
+            </summary>
+        </member>
+        <member name="P:Robin.Movies.Api.Models.CastForCreationRequest.Actors">
+            <summary>
+            Collection of movie actors
+            </summary>
+        </member>
+        <member name="P:Robin.Movies.Api.Models.CastForCreationRequest.Director">
+            <summary>
+            Name of movie director
+            </summary>
+        </member>
+        <member name="P:Robin.Movies.Api.Models.CastForCreationRequest.Producers">
+            <summary>
+            Collection of movie producers
+            </summary>
+        </member>
+        <member name="T:Robin.Movies.Api.Models.CastResponse">
+            <summary>
+            Movie Cast response Model
+            </summary>
+        </member>
+        <member name="P:Robin.Movies.Api.Models.CastResponse.Actors">
+            <summary>
+            Collection of movie actors
+            </summary>
+        </member>
+        <member name="P:Robin.Movies.Api.Models.CastResponse.Director">
+            <summary>
+            Name of movie director
+            </summary>
+        </member>
+        <member name="P:Robin.Movies.Api.Models.CastResponse.Producers">
+            <summary>
+            Collection of movie producers
+            </summary>
+        </member>
+        <member name="T:Robin.Movies.Api.Models.MovieForCreationRequest">
+            <summary>
+            Request model for movie creation
+            </summary>
+        </member>
+        <member name="P:Robin.Movies.Api.Models.MovieForCreationRequest.Title">
+            <summary>
+            Title of the movie
+            </summary>
+        </member>
+        <member name="P:Robin.Movies.Api.Models.MovieForCreationRequest.Description">
+            <summary>
+            Movie description
+            </summary>
+        </member>
+        <member name="P:Robin.Movies.Api.Models.MovieForCreationRequest.ImbdRating">
+            <summary>
+            Rating given to movie by Imbd
+            </summary>
+        </member>
+        <member name="P:Robin.Movies.Api.Models.MovieForCreationRequest.Cast">
+            <summary>
+            Entire cast of the movie
+            </summary>
+        </member>
+        <member name="T:Robin.Movies.Api.Models.MovieResponse">
+            <summary>
+            Movie Response 
+            </summary>
+        </member>
+        <member name="P:Robin.Movies.Api.Models.MovieResponse.Title">
+            <summary>
+            Title of the movie
+            </summary>
+        </member>
+        <member name="P:Robin.Movies.Api.Models.MovieResponse.Description">
+            <summary>
+            Movie description
+            </summary>
+        </member>
+        <member name="P:Robin.Movies.Api.Models.MovieResponse.ImbdRating">
+            <summary>
+            Rating given to movie by Imbd
+            </summary>
+        </member>
+        <member name="P:Robin.Movies.Api.Models.MovieResponse.Cast">
+            <summary>
+            Entire cast of the movie
+            </summary>
+        </member>
+        <member name="T:Robin.Movies.Api.Profiles.MovieProfile">
+            <summary>
+            Movie profile which hold the mapping configuration of entity and request/response models
+            </summary>
+        </member>
+        <member name="M:Robin.Movies.Api.Profiles.MovieProfile.#ctor">
+            <summary>
+            Creating mapping configuration
+            </summary>
         </member>
         <member name="T:Robin.Movies.Api.Services.Contracts.IMoviesRepository">
             <summary>
@@ -129,10 +281,88 @@
             <param name="name"></param>
             <returns></returns>
         </member>
+        <member name="T:Robin.Movies.Api.Services.Contracts.IRepository`1">
+            <summary>
+            Repository which manages the movies
+            </summary>
+            <typeparam name="TModel">Movie Model</typeparam>
+        </member>
+        <member name="M:Robin.Movies.Api.Services.Contracts.IRepository`1.AddAsync(`0)">
+            <summary>
+            Adds the TModel 
+            </summary>
+            <param name="model">Model to be added</param>
+            <returns></returns>
+        </member>
+        <member name="M:Robin.Movies.Api.Services.Contracts.IRepository`1.GetAllAsync">
+            <summary>
+            Get all the available movies
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Robin.Movies.Api.Services.Contracts.IRepository`1.GetByIdAsync(System.String)">
+            <summary>
+            Get the movie by matching Id
+            </summary>
+            <param name="id">Id of the requested movie</param>
+            <returns></returns>
+        </member>
+        <member name="M:Robin.Movies.Api.Services.Contracts.IRepository`1.GetAllAsync(System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}})">
+            <summary>
+            Gets all the movies which mateches 
+            </summary>
+            <param name="predicate"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Robin.Movies.Api.Services.MongoRepository`1">
+            <summary>
+            Repository which manages the operation on movie collection in mongodb
+            </summary>
+            <typeparam name="TModel">Movie Model</typeparam>
+        </member>
+        <member name="M:Robin.Movies.Api.Services.MongoRepository`1.#ctor(Robin.Movies.Api.DataAccess.Contracts.ICollectionContext{`0})">
+            <summary>
+            Initialize the Collection
+            </summary>
+            <param name="collectionContext"></param>
+        </member>
+        <member name="M:Robin.Movies.Api.Services.MongoRepository`1.#ctor(Robin.Movies.Api.DataAccess.Contracts.IDbContext)">
+            <summary>
+            Initialize the collection
+            </summary>
+            <param name="dbContext"></param>
+        </member>
         <member name="P:Robin.Movies.Api.Services.MongoRepository`1.Collection">
             <summary>
             Instance of the MongoCollection
             </summary>
+        </member>
+        <member name="M:Robin.Movies.Api.Services.MongoRepository`1.AddAsync(`0)">
+            <summary>
+            Adds the movie to the movies collection
+            </summary>
+            <param name="model">Movie to be added to the collection</param>
+            <returns></returns>
+        </member>
+        <member name="M:Robin.Movies.Api.Services.MongoRepository`1.GetAllAsync(System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}})">
+            <summary>
+            Gets all the movies which mateches 
+            </summary>
+            <param name="predicate"></param>
+            <returns>Returns the collection of TModel which matches with the predicate </returns>
+        </member>
+        <member name="M:Robin.Movies.Api.Services.MongoRepository`1.GetByIdAsync(System.String)">
+            <summary>
+            Get the movie by matching Id
+            </summary>
+            <param name="id">Id of the requested movie</param>
+            <returns>Returns the Matching TModel</returns>
+        </member>
+        <member name="M:Robin.Movies.Api.Services.MongoRepository`1.GetAllAsync">
+            <summary>
+            Get all the available movies
+            </summary>
+            <returns>Returns the Collection of TModel</returns>
         </member>
     </members>
 </doc>

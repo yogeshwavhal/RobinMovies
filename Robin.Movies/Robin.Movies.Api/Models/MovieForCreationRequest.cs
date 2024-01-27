@@ -2,9 +2,9 @@
 namespace Robin.Movies.Api.Models
 {
     /// <summary>
-    /// Movie Response 
+    /// Request model for movie creation
     /// </summary>
-    public class MovieResponse
+    public class MovieForCreationRequest
     {
         /// <summary>
         /// Title of the movie
@@ -24,6 +24,6 @@ namespace Robin.Movies.Api.Models
         /// <summary>
         /// Entire cast of the movie
         /// </summary>
-        public required CastResponse Cast { get; set; }
+        public required CastForCreationRequest Cast { get; set; }
     }
 }
