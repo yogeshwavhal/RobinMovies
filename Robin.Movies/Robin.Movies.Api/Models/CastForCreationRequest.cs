@@ -1,9 +1,10 @@
-﻿namespace Robin.Movies.Api.Models
+﻿
+namespace Robin.Movies.Api.Models
 {
     /// <summary>
-    /// Movie Cast response Model
+    /// Request model for movie cast creation
     /// </summary>
-    public class CastResponse
+    public class CastForCreationRequest
     {
         /// <summary>
         /// Collection of movie actors

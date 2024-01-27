@@ -8,14 +8,30 @@ using Robin.Movies.Api.DataAccess.Options;
 using Robin.Movies.Api.Entities;
 using Robin.Movies.Api.Services;
 using Robin.Movies.Api.Services.Contracts;
+using Serilog;
 using System.Reflection;
 
 namespace Robin.Movies.Api.Extensions
 {
+    /// <summary>
+    /// Extensions for Configuring services and pipelines
+    /// </summary>
     public static class StartupExtension
     {
+        /// <summary>
+        /// It configures the pipeline
+        /// </summary>
+        /// <param name="builder">instance of WebApplicationBuilder </param>
+        /// <returns></returns>
         public static WebApplication ConfigurePipeline(this WebApplicationBuilder builder)
         {
+            //Adding serilog for logging on console as well as in file
+            Log.Logger = new LoggerConfiguration()
+                        .MinimumLevel.Debug()
+                        .WriteTo.Console()
+                        .WriteTo.File("Logs/Robin.Movies.Api.log")
+                        .CreateLogger();
+
             builder.Services.AddControllers();
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
