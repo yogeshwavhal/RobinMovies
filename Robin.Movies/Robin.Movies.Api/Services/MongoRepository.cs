@@ -1,4 +1,5 @@
-﻿using MongoDB.Bson;
+﻿using Microsoft.OpenApi.Validations;
+using MongoDB.Bson;
 using MongoDB.Driver;
 using Robin.Movies.Api.Constants;
 using Robin.Movies.Api.DataAccess.Contracts;
@@ -79,6 +80,31 @@ namespace Robin.Movies.Api.Services
             var filter = Builders<TModel>.Filter.Empty;
             var models = await Collection.FindAsync(filter);
             return await models.ToListAsync();
+        }
+
+        /// <summary>
+        /// Updates the model
+        /// </summary>
+        /// <param name="id">id of the model to be updated</param>
+        /// <param name="model">model with which we need to update the existing model</param>
+        /// <returns>Retuns true if updation was successful false otherwise</returns>
+        public async Task<bool> UpdateAsync(string id, TModel model)
+        {
+            var idFilter = Builders<TModel>.Filter.Eq("_id", new ObjectId(id));
+            var replaceOneResult = await Collection.ReplaceOneAsync(idFilter, model);
+            return replaceOneResult.IsAcknowledged && replaceOneResult.ModifiedCount > 0;
+        }
+
+        /// <summary>
+        /// It removes the model
+        /// </summary>
+        /// <param name="id">Id of the model to be removed</param>
+        /// <returns>Returns true if the model was deleted successfully false otherwise</returns>
+        public async Task<bool> RemoveAsync(string id)
+        {
+            var idFilter = Builders<TModel>.Filter.Eq("_id", new ObjectId(id));
+            var deleteOneResult = await Collection.DeleteOneAsync(idFilter);
+            return deleteOneResult.IsAcknowledged && deleteOneResult.DeletedCount > 0;
         }
     }
 }

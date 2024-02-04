@@ -17,6 +17,8 @@ namespace Robin.Movies.Api.Profiles
             CreateMap<Entities.Cast, CastResponse>();
             CreateMap<MovieForCreationRequest, Entities.Movie>();
             CreateMap<CastForCreationRequest, Entities.Cast>();
+            CreateMap<MovieForUpdationRequest, Entities.Movie>();
+            CreateMap<CastForCreationRequest, Entities.Cast>();
         }
     }
 }
