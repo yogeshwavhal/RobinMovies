@@ -1,6 +1,8 @@
 ﻿using Asp.Versioning;
+using FluentValidation;
 using Microsoft.Extensions.Options;
 using MongoDB.Driver;
+using Prometheus;
 using Robin.Movies.Api.Constants;
 using Robin.Movies.Api.DataAccess;
 using Robin.Movies.Api.DataAccess.Contracts;
@@ -8,6 +10,7 @@ using Robin.Movies.Api.DataAccess.Options;
 using Robin.Movies.Api.Entities;
 using Robin.Movies.Api.Services;
 using Robin.Movies.Api.Services.Contracts;
+using Robin.Movies.Api.Validators;
 using Serilog;
 using System.Reflection;
 
@@ -52,6 +55,7 @@ namespace Robin.Movies.Api.Extensions
 
             var app = builder.Build();
 
+            app.UseMetricServer();
             // Configure the HTTP request pipeline.
             if (app.Environment.IsDevelopment())
             {
@@ -60,7 +64,7 @@ namespace Robin.Movies.Api.Extensions
             }
 
             app.UseHttpsRedirection();
-
+            app.UseHttpMetrics(options => options.AddCustomLabel("host", context => context.Request.Host.Host));
             app.UseAuthorization();
 
             app.MapControllers();
@@ -80,6 +84,7 @@ namespace Robin.Movies.Api.Extensions
                 setupAction.DefaultApiVersion = new ApiVersion(1, 0);
                 setupAction.ReportApiVersions = true;
             });
+
             //Adding AutoMapper for current executing assembly
             builder.Services.AddAutoMapper(Assembly.GetExecutingAssembly());
             builder.Services.Configure<MongoDbContextOptions>(builder.Configuration.GetSection(ApiConstant.Config.Section.MongoDbContextOptions));
@@ -91,6 +96,7 @@ namespace Robin.Movies.Api.Extensions
             });
             builder.Services.AddScoped<IMoviesRepository, MovieRepository>();
             builder.Services.AddScoped<ICollectionContext<Movie>, MoviesCollectionContext>();
+            builder.Services.AddValidatorsFromAssemblyContaining<MovieValidator>();
             return builder;
         }
     }

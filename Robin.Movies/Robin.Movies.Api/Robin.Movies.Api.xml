@@ -43,11 +43,20 @@
             <summary>
             Controller for movies
             </summary>
-        </member>
-        <member name="M:Robin.Movies.Api.Controllers.MoviesController.#ctor(Microsoft.Extensions.Logging.ILogger{Robin.Movies.Api.Controllers.MoviesController},AutoMapper.IMapper,Robin.Movies.Api.Services.Contracts.IMoviesRepository)">
-            <summary>
+            <remarks>
             Initializes the dependencies
+            </remarks>
+            <param name="logger"></param>
+            <param name="mapper"></param>
+            <param name="moviesRepository"></param>
+        </member>
+        <member name="M:Robin.Movies.Api.Controllers.MoviesController.#ctor(Microsoft.Extensions.Logging.ILogger{Robin.Movies.Api.Controllers.MoviesController},AutoMapper.IMapper,Robin.Movies.Api.Services.Contracts.IMoviesRepository,FluentValidation.IValidator{Robin.Movies.Api.Models.MovieForCreationRequest})">
+            <summary>
+            Controller for movies
             </summary>
+            <remarks>
+            Initializes the dependencies
+            </remarks>
             <param name="logger"></param>
             <param name="mapper"></param>
             <param name="moviesRepository"></param>
@@ -150,6 +159,56 @@
             <param name="options">Instance of MongoDbContextOptions to be validated</param>
             <returns>Returns the ValidationResult depending on success or failure</returns>
         </member>
+        <member name="T:Robin.Movies.Api.Entities.Cast">
+            <summary>
+            Movies Cast
+            </summary>
+        </member>
+        <member name="P:Robin.Movies.Api.Entities.Cast.Actors">
+            <summary>
+            Names of the movie actors
+            </summary>
+        </member>
+        <member name="P:Robin.Movies.Api.Entities.Cast.Director">
+            <summary>
+            Name of the movie director
+            </summary>
+        </member>
+        <member name="P:Robin.Movies.Api.Entities.Cast.Producers">
+            <summary>
+            Names of the movie producers
+            </summary>
+        </member>
+        <member name="T:Robin.Movies.Api.Entities.Movie">
+            <summary>
+            Movie Entity Model
+            </summary>
+        </member>
+        <member name="P:Robin.Movies.Api.Entities.Movie.Id">
+            <summary>
+            Movie Id which will be used to uniquely identify the movie
+            </summary>
+        </member>
+        <member name="P:Robin.Movies.Api.Entities.Movie.Title">
+            <summary>
+            Title of the movie
+            </summary>
+        </member>
+        <member name="P:Robin.Movies.Api.Entities.Movie.Description">
+            <summary>
+            Movie description
+            </summary>
+        </member>
+        <member name="P:Robin.Movies.Api.Entities.Movie.ImbdRating">
+            <summary>
+            Imdb rating of the movie
+            </summary>
+        </member>
+        <member name="P:Robin.Movies.Api.Entities.Movie.Cast">
+            <summary>
+            Cast of the movie
+            </summary>
+        </member>
         <member name="T:Robin.Movies.Api.Extensions.StartupExtension">
             <summary>
             Extensions for Configuring services and pipelines
@@ -167,6 +226,19 @@
             Manages the registration of services
             </summary>
             <param name="builder"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Robin.Movies.Api.Extensions.ValidationResultExtension">
+            <summary>
+            Extension for Fluent Validators ValidationResult
+            </summary>
+        </member>
+        <member name="M:Robin.Movies.Api.Extensions.ValidationResultExtension.AddToModelState(FluentValidation.Results.ValidationResult,Microsoft.AspNetCore.Mvc.ModelBinding.ModelStateDictionary)">
+            <summary>
+            Adds the model error tp the model state
+            </summary>
+            <param name="result">Instance of ValidationResult</param>
+            <param name="modelState">ModelStateDictionary</param>
             <returns></returns>
         </member>
         <member name="T:Robin.Movies.Api.Models.CastForCreationRequest">
@@ -363,6 +435,29 @@
             Get all the available movies
             </summary>
             <returns>Returns the Collection of TModel</returns>
+        </member>
+        <member name="M:Robin.Movies.Api.Services.MovieRepository.#ctor(Robin.Movies.Api.DataAccess.Contracts.ICollectionContext{Robin.Movies.Api.Entities.Movie})">
+            <summary>
+            Movies Repository which manages the operation on movies collection
+            </summary>
+            <param name="collectionContext"></param>
+        </member>
+        <member name="M:Robin.Movies.Api.Services.MovieRepository.FindByNameAsync(System.String)">
+            <summary>
+            Gets the movie by matching name
+            </summary>
+            <param name="name"></param>
+            <returns>Returns the movies collection with given name</returns>
+        </member>
+        <member name="T:Robin.Movies.Api.Validators.MovieValidator">
+            <summary>
+            Validator for movie response models
+            </summary>
+        </member>
+        <member name="M:Robin.Movies.Api.Validators.MovieValidator.#ctor">
+            <summary>
+            Ctor
+            </summary>
         </member>
     </members>
 </doc>

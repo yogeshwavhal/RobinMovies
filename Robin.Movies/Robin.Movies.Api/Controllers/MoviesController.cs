@@ -1,7 +1,9 @@
 ﻿using Asp.Versioning;
 using AutoMapper;
+using FluentValidation;
 using Microsoft.AspNetCore.Mvc;
 using Robin.Movies.Api.Entities;
+using Robin.Movies.Api.Extensions;
 using Robin.Movies.Api.Models;
 using Robin.Movies.Api.Services.Contracts;
 
@@ -10,35 +12,28 @@ namespace Robin.Movies.Api.Controllers
     /// <summary>
     /// Controller for movies
     /// </summary>
+    /// <remarks>
+    /// Initializes the dependencies
+    /// </remarks>
+    /// <param name="logger"></param>
+    /// <param name="mapper"></param>
+    /// <param name="moviesRepository"></param>
+    /// <param name="movieForCreationRequestValidator">Validator for MovieForCreationRequest</param>
     [ApiController]
     [ApiVersion("1.0")]
     [Route("api/v{version:apiVersion}/movies/")]
-    public class MoviesController : ControllerBase
+    public class MoviesController(
+        ILogger<MoviesController> logger,
+        IMapper mapper,
+        IMoviesRepository moviesRepository,
+        IValidator<MovieForCreationRequest> movieForCreationRequestValidator) : ControllerBase
     {
         #region Private Fields
 
-        private readonly ILogger<MoviesController> _logger;
-        private readonly IMapper _mapper;
-        private readonly IMoviesRepository _moviesRepository;
-
-        #endregion
-
-        #region Public Constructor
-        /// <summary>
-        /// Initializes the dependencies
-        /// </summary>
-        /// <param name="logger"></param>
-        /// <param name="mapper"></param>
-        /// <param name="moviesRepository"></param>
-        public MoviesController(
-            ILogger<MoviesController> logger,
-            IMapper mapper,
-            IMoviesRepository moviesRepository)
-        {
-            _logger = logger;
-            _mapper = mapper;
-            _moviesRepository = moviesRepository;
-        }
+        private readonly ILogger<MoviesController> _logger = logger;
+        private readonly IMapper _mapper = mapper;
+        private readonly IMoviesRepository _moviesRepository = moviesRepository;
+        private readonly IValidator<MovieForCreationRequest> _movieForCreationRequestValidator = movieForCreationRequestValidator;
 
         #endregion
 
@@ -112,6 +107,15 @@ namespace Robin.Movies.Api.Controllers
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<ActionResult<MovieResponse>> CreateMovie(MovieForCreationRequest movieRequest)
         {
+            // Validate the input model and adds the error to model state if it has any
+            var result = await _movieForCreationRequestValidator.ValidateAsync(movieRequest);
+
+            if (!result.IsValid)
+            {
+                result.AddToModelState(this.ModelState);
+                return BadRequest(this.ModelState);
+            }
+
             _logger.LogInformation("Creating a movie.");
 
             //Create movie entity by mapping the movie request model
