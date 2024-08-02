@@ -3,7 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.8.34408.163
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Robin.Movies.Api", "Robin.Movies.Api\Robin.Movies.Api.csproj", "{E92451C3-9F76-4974-94CB-A92A1B704089}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Robin.Movies.Api", "Robin.Movies.Api\Robin.Movies.Api.csproj", "{E92451C3-9F76-4974-94CB-A92A1B704089}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Robin.Movies.AppHost", "Robin.Movies.AppHost\Robin.Movies.AppHost.csproj", "{2FB27B6A-9F59-4504-8BA7-F24A3277B521}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Robin.Movies.ServiceDefaults", "Robin.Movies.ServiceDefaults\Robin.Movies.ServiceDefaults.csproj", "{CFBA8271-8D94-4968-BB94-246B0A787FAE}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +19,14 @@ Global
 		{E92451C3-9F76-4974-94CB-A92A1B704089}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E92451C3-9F76-4974-94CB-A92A1B704089}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E92451C3-9F76-4974-94CB-A92A1B704089}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2FB27B6A-9F59-4504-8BA7-F24A3277B521}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2FB27B6A-9F59-4504-8BA7-F24A3277B521}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2FB27B6A-9F59-4504-8BA7-F24A3277B521}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2FB27B6A-9F59-4504-8BA7-F24A3277B521}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CFBA8271-8D94-4968-BB94-246B0A787FAE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CFBA8271-8D94-4968-BB94-246B0A787FAE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CFBA8271-8D94-4968-BB94-246B0A787FAE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CFBA8271-8D94-4968-BB94-246B0A787FAE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

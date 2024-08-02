@@ -120,6 +120,7 @@ namespace Robin.Movies.Api.Controllers
 
             //Create movie entity by mapping the movie request model
             var movieEntity = _mapper.Map<Movie>(movieRequest);
+            movieEntity.Id = Guid.NewGuid().ToString();
 
             //Add the created movie instance
             await _moviesRepository.AddAsync(movieEntity);
@@ -137,7 +138,7 @@ namespace Robin.Movies.Api.Controllers
         /// <response code="200">Movie has been created successfully</response>
         /// <response code="404">Could not found a movie</response>
         /// <response code="204">Movie updation was successful</response>
-        [HttpPost()]
+        [HttpPut()]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
@@ -166,11 +167,9 @@ namespace Robin.Movies.Api.Controllers
         /// Updates the Movie
         /// </summary>
         /// <returns>Returns ActionResult</returns>
-        /// <response code="200">Movie has been created successfully</response>
-        /// <response code="404">Could not found a movie</response>
-        /// <response code="204">Movie updation was successful</response>
-        [HttpPost()]
-        [ProducesResponseType(StatusCodes.Status200OK)]
+        /// <response code="404">Could not found a movie  to be deleted</response>
+        /// <response code="204">Movie Deletion was successful</response>
+        [HttpDelete()]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         public async Task<ActionResult> DeleteMovie(string id)
@@ -183,7 +182,7 @@ namespace Robin.Movies.Api.Controllers
                 return NotFound();
             }
 
-            //updates the movie
+            //Delete the movie
             await _moviesRepository.RemoveAsync(id);
 
             return NoContent();

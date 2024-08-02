@@ -1,6 +1,7 @@
 ﻿using Asp.Versioning;
 using FluentValidation;
 using Microsoft.Extensions.Options;
+using Microsoft.OpenApi.Models;
 using MongoDB.Driver;
 using Prometheus;
 using Robin.Movies.Api.Constants;
@@ -38,6 +39,7 @@ namespace Robin.Movies.Api.Extensions
             builder.Services.AddControllers();
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
+            //builder.Services.AddSwaggerGen();
             builder.Services.AddSwaggerGen(setupAction =>
             {
                 //setupAction.SwaggerDoc("V1", new OpenApiInfo()
@@ -78,6 +80,7 @@ namespace Robin.Movies.Api.Extensions
         /// <returns></returns>
         public static WebApplicationBuilder ConfigureServices(this WebApplicationBuilder builder)
         {
+            builder.AddServiceDefaults();
             builder.Services.AddApiVersioning(setupAction =>
             {
                 setupAction.AssumeDefaultVersionWhenUnspecified = true;
@@ -89,12 +92,16 @@ namespace Robin.Movies.Api.Extensions
             builder.Services.AddAutoMapper(Assembly.GetExecutingAssembly());
             builder.Services.Configure<MongoDbContextOptions>(builder.Configuration.GetSection(ApiConstant.Config.Section.MongoDbContextOptions));
             builder.Services.AddSingleton<IValidateOptions<MongoDbContextOptions>, MongoDbContextOptionsValidator>();
-            builder.Services.AddSingleton<IMongoClient>(x =>
-            {
-                var mongoDbContextOption = x.GetRequiredService<IOptions<MongoDbContextOptions>>();
-                return new MongoClient(mongoDbContextOption.Value.ConnectionUrl);
-            });
+            builder.AddMongoDBClient("mongodb");
+            //builder.AddMongoDBClient("MongoConnection");
+            //builder.Services.AddSingleton<IMongoClient>(x =>
+            //{
+            //    var mongoDbContextOption = x.GetRequiredService<IOptions<MongoDbContextOptions>>();
+            //    return new MongoClient(mongoDbContextOption.Value.ConnectionUrl);
+            //});
+            //builder.Services.AddScoped<IMoviesRepository, MovieRepo>();
             builder.Services.AddScoped<IMoviesRepository, MovieRepository>();
+            //builder.Services.AddSingleton<IMoviesRepository, InMemoryMovieRepository>();
             builder.Services.AddScoped<ICollectionContext<Movie>, MoviesCollectionContext>();
             builder.Services.AddValidatorsFromAssemblyContaining<MovieValidator>();
             return builder;

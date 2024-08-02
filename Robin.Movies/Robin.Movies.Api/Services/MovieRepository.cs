@@ -11,9 +11,9 @@ namespace Robin.Movies.Api.Services
         /// Movies Repository which manages the operation on movies collection
         /// </summary>
         /// <param name="collectionContext"></param>
-        public MovieRepository(ICollectionContext<Movie> collectionContext):base(collectionContext)
+        public MovieRepository(ICollectionContext<Movie> collectionContext) : base(collectionContext)
         {
-            
+
         }
 
         /// <summary>

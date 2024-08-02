@@ -49,6 +49,7 @@
             <param name="logger"></param>
             <param name="mapper"></param>
             <param name="moviesRepository"></param>
+            <param name="movieForCreationRequestValidator">Validator for MovieForCreationRequest</param>
         </member>
         <member name="M:Robin.Movies.Api.Controllers.MoviesController.#ctor(Microsoft.Extensions.Logging.ILogger{Robin.Movies.Api.Controllers.MoviesController},AutoMapper.IMapper,Robin.Movies.Api.Services.Contracts.IMoviesRepository,FluentValidation.IValidator{Robin.Movies.Api.Models.MovieForCreationRequest})">
             <summary>
@@ -60,6 +61,7 @@
             <param name="logger"></param>
             <param name="mapper"></param>
             <param name="moviesRepository"></param>
+            <param name="movieForCreationRequestValidator">Validator for MovieForCreationRequest</param>
         </member>
         <member name="M:Robin.Movies.Api.Controllers.MoviesController.GetMovie(System.String)">
             <summary>
@@ -87,6 +89,23 @@
             <returns>Returns the created movie</returns>
             <response code="200">Movie has been created successfully</response>
             <response code="400">Could not creat a movie</response>
+        </member>
+        <member name="M:Robin.Movies.Api.Controllers.MoviesController.UpdateMovie(System.String,Robin.Movies.Api.Models.MovieForCreationRequest)">
+            <summary>
+            Updates the Movie
+            </summary>
+            <returns>Returns ActionResult</returns>
+            <response code="200">Movie has been created successfully</response>
+            <response code="404">Could not found a movie</response>
+            <response code="204">Movie updation was successful</response>
+        </member>
+        <member name="M:Robin.Movies.Api.Controllers.MoviesController.DeleteMovie(System.String)">
+            <summary>
+            Updates the Movie
+            </summary>
+            <returns>Returns ActionResult</returns>
+            <response code="404">Could not found a movie  to be deleted</response>
+            <response code="204">Movie Deletion was successful</response>
         </member>
         <member name="T:Robin.Movies.Api.DataAccess.Contracts.ICollectionContext`1">
             <summary>
@@ -261,6 +280,26 @@
             Collection of movie producers
             </summary>
         </member>
+        <member name="T:Robin.Movies.Api.Models.CastForUpdationRequest">
+            <summary>
+            Request model for movie cast updation
+            </summary>
+        </member>
+        <member name="P:Robin.Movies.Api.Models.CastForUpdationRequest.Actors">
+            <summary>
+            Collection of movie actors
+            </summary>
+        </member>
+        <member name="P:Robin.Movies.Api.Models.CastForUpdationRequest.Director">
+            <summary>
+            Name of movie director
+            </summary>
+        </member>
+        <member name="P:Robin.Movies.Api.Models.CastForUpdationRequest.Producers">
+            <summary>
+            Collection of movie producers
+            </summary>
+        </member>
         <member name="T:Robin.Movies.Api.Models.CastResponse">
             <summary>
             Movie Cast response Model
@@ -302,6 +341,31 @@
             </summary>
         </member>
         <member name="P:Robin.Movies.Api.Models.MovieForCreationRequest.Cast">
+            <summary>
+            Entire cast of the movie
+            </summary>
+        </member>
+        <member name="T:Robin.Movies.Api.Models.MovieForUpdationRequest">
+            <summary>
+            Request model for movie updation
+            </summary>
+        </member>
+        <member name="P:Robin.Movies.Api.Models.MovieForUpdationRequest.Title">
+            <summary>
+            Title of the movie
+            </summary>
+        </member>
+        <member name="P:Robin.Movies.Api.Models.MovieForUpdationRequest.Description">
+            <summary>
+            Movie description
+            </summary>
+        </member>
+        <member name="P:Robin.Movies.Api.Models.MovieForUpdationRequest.ImbdRating">
+            <summary>
+            Rating given to movie by Imbd
+            </summary>
+        </member>
+        <member name="P:Robin.Movies.Api.Models.MovieForUpdationRequest.Cast">
             <summary>
             Entire cast of the movie
             </summary>
@@ -386,6 +450,21 @@
             <param name="predicate"></param>
             <returns></returns>
         </member>
+        <member name="M:Robin.Movies.Api.Services.Contracts.IRepository`1.UpdateAsync(System.String,`0)">
+            <summary>
+            Updates the model
+            </summary>
+            <param name="id">id of the model to be updated</param>
+            <param name="model">model with which we need to update the existing model</param>
+            <returns>Retuns true if updation was successful false otherwise</returns>
+        </member>
+        <member name="M:Robin.Movies.Api.Services.Contracts.IRepository`1.RemoveAsync(System.String)">
+            <summary>
+            It removes the model
+            </summary>
+            <param name="id">Id of the model to be removed</param>
+            <returns>Returns true if the model was deleted successfully false otherwise</returns>
+        </member>
         <member name="T:Robin.Movies.Api.Services.MongoRepository`1">
             <summary>
             Repository which manages the operation on movie collection in mongodb
@@ -435,6 +514,21 @@
             Get all the available movies
             </summary>
             <returns>Returns the Collection of TModel</returns>
+        </member>
+        <member name="M:Robin.Movies.Api.Services.MongoRepository`1.UpdateAsync(System.String,`0)">
+            <summary>
+            Updates the model
+            </summary>
+            <param name="id">id of the model to be updated</param>
+            <param name="model">model with which we need to update the existing model</param>
+            <returns>Retuns true if updation was successful false otherwise</returns>
+        </member>
+        <member name="M:Robin.Movies.Api.Services.MongoRepository`1.RemoveAsync(System.String)">
+            <summary>
+            It removes the model
+            </summary>
+            <param name="id">Id of the model to be removed</param>
+            <returns>Returns true if the model was deleted successfully false otherwise</returns>
         </member>
         <member name="M:Robin.Movies.Api.Services.MovieRepository.#ctor(Robin.Movies.Api.DataAccess.Contracts.ICollectionContext{Robin.Movies.Api.Entities.Movie})">
             <summary>

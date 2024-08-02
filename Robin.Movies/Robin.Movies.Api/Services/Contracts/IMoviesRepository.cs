@@ -14,6 +14,5 @@ namespace Robin.Movies.Api.Services.Contracts
         /// <param name="name"></param>
         /// <returns></returns>
         Task<IEnumerable<Movie>> FindByNameAsync(string name);
-        
     }
 }
